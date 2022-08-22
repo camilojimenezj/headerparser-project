@@ -26,7 +26,7 @@ app.get('/api/hello', function (req, res) {
 
 // request header microservice
 app.get('/api/whoami', (req, res) => {
-  const ip = req.connection.remoteAddress;
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   res.json({
     ipaddress: ip,
     language: req.headers['accept-language'],
